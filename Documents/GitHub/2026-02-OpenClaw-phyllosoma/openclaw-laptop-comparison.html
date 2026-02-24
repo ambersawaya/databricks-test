@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenClaw Laptop Comparison</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap");
+
+    :root {
+      --bg: #e6e6e6;
+      --surface: #f7f8fb;
+      --surface-2: #ffffff;
+      --surface-3: #f0f2f8;
+      --text: #12151c;
+      --muted: #5a6172;
+      --line: #d9deea;
+      --brand: #1f5bff;
+      --link-strong: #163da8;
+      --ok: #16a34a;
+      --no: #d11a2a;
+      --shadow: 0 24px 50px rgba(14, 21, 35, 0.2);
+      --spec-col-width: 28%;
+      --laptop-col-width: 24%;
+    }
+
+    html[data-theme="dark"] {
+      --bg: #0c0e12;
+      --surface: #131720;
+      --surface-2: #171c27;
+      --surface-3: #0e1219;
+      --text: #edf2fb;
+      --muted: #a3adbf;
+      --line: #2a3140;
+      --brand: #79a2ff;
+      --link-strong: #bdd0ff;
+      --ok: #34d970;
+      --no: #ff6a74;
+      --shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(99, 131, 255, 0.18), transparent 42%),
+        radial-gradient(circle at 95% 18%, rgba(130, 155, 255, 0.18), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      font-family: Manrope, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding: 34px 14px;
+    }
+
+    .shell {
+      max-width: 1220px;
+      margin: 0 auto;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      letter-spacing: 0.12em;
+      font: 700 0.9rem "Space Grotesk", sans-serif;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .top-actions a {
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 30px 28px 24px;
+      background: linear-gradient(130deg, var(--surface-2), var(--surface-3));
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 18px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin: 0 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.9rem, 4vw, 3.25rem);
+      line-height: 1.05;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      margin-top: 12px;
+      text-decoration: none;
+      color: #fff;
+      background: #0e1016;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    html[data-theme="dark"] .hero-cta {
+      background: #fff;
+      color: #0f131b;
+    }
+
+    .hero-image {
+      text-align: right;
+    }
+
+    .hero-image img {
+      width: min(100%, 450px);
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      display: inline-block;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 28px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-2);
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      background: var(--surface);
+      min-width: 290px;
+    }
+
+    .search input {
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      width: 100%;
+      padding: 10px 14px;
+      font: inherit;
+      outline: none;
+    }
+
+    .search button {
+      border: 0;
+      border-left: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      font-weight: 700;
+      padding: 10px 14px;
+      cursor: pointer;
+    }
+
+    .theme-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.86rem;
+    }
+
+    .toggle {
+      width: 46px;
+      height: 25px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .toggle::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: var(--text);
+      transition: transform 0.2s ease;
+    }
+
+    .toggle[data-on="true"]::after {
+      transform: translateX(21px);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: var(--spec-col-width) repeat(3, minmax(0, var(--laptop-col-width)));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .specs-col,
+    .laptop-card {
+      border-right: 1px solid var(--line);
+      padding: 16px;
+      background: var(--surface-2);
+      min-height: 240px;
+    }
+
+    .products > :last-child {
+      border-right: 0;
+    }
+
+    .specs-col p {
+      color: var(--muted);
+      margin: 0 0 14px;
+      max-width: 220px;
+      font-size: 0.92rem;
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      display: inline-block;
+      background: var(--surface);
+    }
+
+    .laptop-card {
+      text-align: center;
+    }
+
+    .laptop-card img {
+      width: 100%;
+      max-width: 225px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      margin-bottom: 10px;
+    }
+
+    .laptop-name {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 800;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .laptop-meta {
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin: 6px 0;
+    }
+
+    .buy {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.77rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1000px;
+      table-layout: fixed;
+    }
+
+    .matrix th,
+    .matrix td {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 16px;
+      font-size: 0.9rem;
+      vertical-align: top;
+    }
+
+    .matrix th:first-child,
+    .matrix td:first-child {
+      background: var(--surface-2);
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .matrix td {
+      background: var(--surface);
+    }
+
+    .matrix tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .matrix td:last-child,
+    .matrix th:last-child {
+      border-right: 0;
+    }
+
+    .matrix a {
+      color: var(--link-strong);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 2px;
+      font-weight: 700;
+    }
+
+    .ok {
+      color: var(--ok);
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .no {
+      color: var(--no);
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 980px) {
+      body {
+        padding: 18px 10px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        text-align: left;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .specs-col,
+      .laptop-card {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .products > :last-child {
+        border-bottom: 0;
+      }
+
+    }
+
+    @media (max-width: 680px) {
+      .toolbar {
+        padding: 12px 16px;
+      }
+
+      .topbar,
+      .hero,
+      .products {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .table-scroller {
+        overflow-x: auto;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="logo">OPENCLAW</div>
+      <div class="top-actions">
+        <span>Laptop Planner</span>
+        <a href="openclaw-deployment-methods.html">Deployment Methods</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Go To Marketplace</p>
+        <h1>OpenClaw Laptop Comparison</h1>
+        <p>Compare three candidate laptops against the required OpenClaw runtime specs, side by side.</p>
+        <a class="hero-cta" href="openclaw-deployment-methods.html">View Deployment Methods</a>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=80" alt="Laptop on a desk">
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <form class="search" action="#" aria-label="Compare search" onsubmit="return false;">
+        <input type="search" placeholder="Compare with..." aria-label="Compare with">
+        <button type="button">Go</button>
+      </form>
+
+      <label class="theme-switch" for="modeToggle">
+        <span id="modeLabel">Turn on Dark Mode</span>
+        <button id="modeToggle" class="toggle" type="button" aria-pressed="false" data-on="false" aria-label="Toggle color mode"></button>
+      </label>
+    </section>
+
+    <section class="products" aria-label="Laptop cards">
+      <article class="specs-col">
+        <p>Use this table to validate each laptop against OpenClaw minimum and recommended requirements.</p>
+        <a class="back-link" href="openclaw-deployment-methods.html">Open Deployment Page</a>
+      </article>
+
+      <article class="laptop-card">
+        <img
+          src="https://mobilecontent.costco.com/live/resource/img/static-us-pdf/1732597-847__1.jpg"
+          alt="HP Victus 16.1 inch (16-r0073cl)"
+          referrerpolicy="no-referrer"
+          onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='https://i.ebayimg.com/images/g/38kAAOSwGdVnWJ5f/s-l1600.webp';}else if(this.dataset.fallback==='1'){this.dataset.fallback='2';this.src='https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=80';}"
+        >
+        <h2 class="laptop-name">Costco Pick: HP Victus 16.1&quot;</h2>
+        <p class="laptop-meta">Costco • $899.97 (tracked, may vary)</p>
+        <a class="buy" href="https://www.costco.com/.product.1009781.html" target="_blank" rel="noopener noreferrer">Buy Now</a>
+      </article>
+
+      <article class="laptop-card">
+        <img src="https://images.price.tools/images/hp-victus-15-fa11-15-6-m-5rmnrScF3.jpg" alt="HP Victus 15-FA11 (Renewed)">
+        <h2 class="laptop-name">Amazon Pick: HP Victus 15-FA11</h2>
+        <p class="laptop-meta">Amazon (Renewed) • $829.99</p>
+        <a class="buy" href="https://us.amazon.com/HP-15-FA11-i7-12650H-10-Core-GeForce/dp/B0DVCFDZK4" target="_blank" rel="noopener noreferrer">Buy Now</a>
+      </article>
+
+      <article class="laptop-card">
+        <img src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=600&q=80" alt="Laptop 3">
+        <h2 class="laptop-name">Laptop 3</h2>
+        <p class="laptop-meta">TBD retailer • TBD price</p>
+        <a class="buy" href="#">Buy Now</a>
+      </article>
+    </section>
+
+    <div class="table-scroller">
+      <table class="matrix" aria-label="OpenClaw laptop requirements matrix">
+        <colgroup>
+          <col style="width: var(--spec-col-width)">
+          <col style="width: var(--laptop-col-width)">
+          <col style="width: var(--laptop-col-width)">
+          <col style="width: var(--laptop-col-width)">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>OpenClaw Needed Specs</th>
+            <th>Costco Pick (&lt; $1000)</th>
+            <th>Amazon Pick (&lt; $1000)</th>
+            <th>Laptop 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Model</td>
+            <td><a href="https://www.costco.com/.product.1009781.html" target="_blank" rel="noopener noreferrer">HP Victus 16.1&quot; (16-r0073cl)</a></td>
+            <td><a href="https://us.amazon.com/HP-15-FA11-i7-12650H-10-Core-GeForce/dp/B0DVCFDZK4" target="_blank" rel="noopener noreferrer">HP Victus 15-FA11 (Renewed)</a></td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <td>Price</td>
+            <td>$899.97 (warehouse-tracked; varies by location)</td>
+            <td>$829.99 (Amazon listing snapshot)</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <td>Retailer</td>
+            <td>Costco</td>
+            <td>Amazon</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <td>CPU<br><span class="muted">Minimum: 6+ cores</span></td>
+            <td>Intel Core i7-13700HX (16 cores)</td>
+            <td>Intel Core i7-12650H (10 cores)</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <td>GPU<br><span class="muted">Minimum: RTX 4050 / RX 7600M or better</span></td>
+            <td>NVIDIA GeForce RTX 4060 (8GB)</td>
+            <td>NVIDIA GeForce RTX 4050 (6GB)</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <td>RAM<br><span class="muted">Minimum: 16 GB • Recommended: 32 GB</span></td>
+            <td>32 GB DDR5</td>
+            <td>16 GB DDR4</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <td>Storage<br><span class="muted">Minimum: 512 GB SSD • Recommended: 1 TB NVMe</span></td>
+            <td>1 TB NVMe SSD</td>
+            <td>512 GB NVMe SSD</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <td>Display<br><span class="muted">Recommended: 15+ in, 1080p, 120Hz+</span></td>
+            <td>16.1&quot; 1920x1080, 144Hz</td>
+            <td>15.6&quot; 1920x1080</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <td>Ports<br><span class="muted">Needed: USB-A, USB-C, HDMI</span></td>
+            <td>USB-A, USB-C, HDMI (listed)</td>
+            <td>USB-A, USB-C, HDMI (listed)</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <td>OS<br><span class="muted">Needed: Windows 11</span></td>
+            <td>Windows 11 Home</td>
+            <td>Windows 11 Home</td>
+            <td>TBD</td>
+          </tr>
+          <tr>
+            <td>Baseline Check: CPU (6+ cores)</td>
+            <td class="ok">✓ Pass</td>
+            <td class="ok">✓ Pass</td>
+            <td class="muted">TBD</td>
+          </tr>
+          <tr>
+            <td>Baseline Check: GPU (RTX 4050 / RX 7600M+)</td>
+            <td class="ok">✓ Pass (RTX 4060)</td>
+            <td class="ok">✓ Pass (RTX 4050)</td>
+            <td class="muted">TBD</td>
+          </tr>
+          <tr>
+            <td>Baseline Check: RAM (16 GB+)</td>
+            <td class="ok">✓ Pass (32 GB)</td>
+            <td class="ok">✓ Pass (16 GB)</td>
+            <td class="muted">TBD</td>
+          </tr>
+          <tr>
+            <td>Baseline Check: Storage (512 GB SSD+)</td>
+            <td class="ok">✓ Pass (1 TB NVMe)</td>
+            <td class="ok">✓ Pass (512 GB NVMe)</td>
+            <td class="muted">TBD</td>
+          </tr>
+          <tr>
+            <td>Baseline Check: OS + Ports</td>
+            <td class="ok">✓ Pass (Win 11 + USB-A/USB-C/HDMI)</td>
+            <td class="ok">✓ Pass (Win 11 + USB-A/USB-C/HDMI)</td>
+            <td class="muted">TBD</td>
+          </tr>
+          <tr>
+            <td>Recommended Tier (32 GB RAM + 1 TB NVMe)</td>
+            <td class="ok">✓ Meets recommended tier</td>
+            <td class="no">✕ Baseline only</td>
+            <td class="muted">TBD</td>
+          </tr>
+          <tr>
+            <td>OpenClaw Readiness Score</td>
+            <td>5/5 baseline checks passed<br><span class="muted">Recommended tier: Yes</span></td>
+            <td>5/5 baseline checks passed<br><span class="muted">Recommended tier: No</span></td>
+            <td class="muted">TBD after specs added</td>
+          </tr>
+          <tr>
+            <td>Meets OpenClaw Baseline (Final)</td>
+            <td class="ok">✓</td>
+            <td class="ok">✓</td>
+            <td class="muted">TBD</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var modeToggle = document.getElementById("modeToggle");
+      var modeLabel = document.getElementById("modeLabel");
+      var storageKey = "openclaw-theme";
+
+      function setTheme(mode) {
+        root.setAttribute("data-theme", mode);
+        var dark = mode === "dark";
+        modeToggle.setAttribute("data-on", dark ? "true" : "false");
+        modeToggle.setAttribute("aria-pressed", dark ? "true" : "false");
+        modeLabel.textContent = dark ? "Turn off Dark Mode" : "Turn on Dark Mode";
+      }
+
+      var savedMode = localStorage.getItem(storageKey);
+      if (savedMode === "dark" || savedMode === "light") {
+        setTheme(savedMode);
+      } else {
+        var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        setTheme(prefersDark ? "dark" : "light");
+      }
+
+      modeToggle.addEventListener("click", function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        setTheme(next);
+        localStorage.setItem(storageKey, next);
+      });
+    })();
+  </script>
+</body>
+</html>
